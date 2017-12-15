@@ -1,0 +1,11 @@
+{
+  allTravels {
+    name
+  	phone
+    dateFrom
+    dateTo
+    origin
+    destination
+    numberp
+  }
+}

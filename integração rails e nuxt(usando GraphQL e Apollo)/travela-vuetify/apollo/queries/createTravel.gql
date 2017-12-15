@@ -1,0 +1,11 @@
+mutation createTravel ($name: String!, $phone: String!, $dateFrom: String!, $dateTo: String!, $origin: String!, $destination: String!, $numberp: Int!) {
+  createCode(name: $name, phone: $phone, dateFrom: $dateFrom, dateTo: $dateTo, origin: $origin, destination: $destination, numberp: $numberp) {
+    name
+    phone
+    dateFrom
+    dateTo
+    origin
+    destination
+    numberp
+  }
+}

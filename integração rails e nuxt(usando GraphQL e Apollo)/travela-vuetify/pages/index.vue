@@ -12,23 +12,16 @@
             <h2 class="headline mb-0 text-xs-center">Create your next Travel</h2>
           </v-card-title>
 
-          <div v-if="errors1.length !== 0">
-            <v-alert outline color="error" :value="true">
-              <li v-for="(value, key) in errors1">
-                <strong>{{key}}:</strong>
-                <div v-for= "err in value">{{err}}</div>
-              </li>
-            </v-alert>
-          </div>
+
 
           <v-form ref="form" @submit.prevent>
               <v-text-field
                 label="Name"
-                v-model="name"
+                v-model="data.name"
               ></v-text-field>
               <v-text-field
                 label="Phone"
-                v-model="phone"
+                v-model="data.phone"
               ></v-text-field>
               <v-menu
                 lazy
@@ -43,9 +36,9 @@
                 <v-text-field
                   slot="activator"
                   label="Date From"
-                  v-model="dateFrom"
+                  v-model="data.dateFrom"
                 ></v-text-field>
-                <v-date-picker @input="dateFrom = $event" no-title scrollable actions>
+                <v-date-picker @input="data.dateFrom = $event" no-title scrollable actions>
                 </v-date-picker>
               </v-menu>
               <v-menu
@@ -61,26 +54,26 @@
                 <v-text-field
                   slot="activator"
                   label="Date To"
-                  v-model="dateTo"
+                  v-model="data.dateTo"
                 ></v-text-field>
-                <v-date-picker @input="dateTo = $event" no-title scrollable actions>
+                <v-date-picker @input="data.dateTo = $event" no-title scrollable actions>
                 </v-date-picker>
               </v-menu>
               <v-text-field
                 label="Origin"
-                v-model="origin"
+                v-model="data.origin"
               ></v-text-field>
               <v-text-field
                 label="Destination"
-                v-model="destination"
+                v-model="data.destination"
               ></v-text-field>
               <v-text-field
                 type='number'
                 label="Number People"
-                v-model="numberp"
+                v-model="data.numberp"
               ></v-text-field>
               <v-btn
-                @click="add({name, phone, dateFrom, dateTo, origin, destination, numberp})"
+                @click="createCode()"
               >
                 submit
               </v-btn>
@@ -107,30 +100,28 @@
 
 </template>
 <script>
-
-import {mapState, mapActions} from 'vuex'
+import createTravel from '~/apollo/queries/createTravel.gql'
 
 export default {
   data () {
     return {
-      name: '',
-      phone: '',
-      dateFrom: '',
-      dateTo: '',
-      origin: '',
-      destination: '',
-      numberp: ''
+      data: {
+        name: '',
+        phone: '',
+        dateFrom: '',
+        dateTo: '',
+        origin: '',
+        destination: '',
+        numberp: ''
+      }
     }
   },
-  computed: {
-    ...mapState({
-      errors1: state => state.errors
-    })
-  },
   methods: {
-    ...mapActions([
-      'add'
-    ])
+    createCode () {
+      // receive the defaultClient
+      // most likely you would call mutations like following:
+      this.$apollo.mutate({createTravel, ...this.data})
+    }
   }
 }
 </script>

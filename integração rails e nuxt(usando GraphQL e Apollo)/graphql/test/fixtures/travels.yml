@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  phone: MyString
+  dateFrom: 2017-12-14
+  dataTo: 2017-12-14
+  origin: MyString
+  destination: MyString
+  numberp: 
+
+two:
+  name: MyString
+  phone: MyString
+  dateFrom: 2017-12-14
+  dataTo: 2017-12-14
+  origin: MyString
+  destination: MyString
+  numberp: 

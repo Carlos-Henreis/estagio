@@ -1,7 +1,7 @@
 <template>
   <v-data-table
       v-bind:headers="headers"
-      :items="travels"
+      :items="allTravels"
       class="elevation-1"
     >
     <template slot="items" scope="props">
@@ -16,10 +16,14 @@
   </v-data-table>
 </template>
 <script>
-
-import {mapState} from 'vuex'
-import axios from 'axios'
+import allTravels from '~/apollo/queries/allTravels'
 export default {
+  apollo: {
+    allTravels: {
+      prefetch: true,
+      query: allTravels
+    }
+  },
   data () {
     return {
       headers: [
@@ -32,17 +36,6 @@ export default {
         { text: 'Number People', value: 'numberp' }
       ]
     }
-  },
-  fetch ({ store, params }) {
-    return axios.get('http://localhost:9998/api/v1/travels')
-      .then((res) => {
-        store.commit('allTravels', res.data)
-      })
-  },
-  computed: {
-    ...mapState({
-      travels: state => state.travels
-    })
   }
 }
 </script>
